@@ -71,16 +71,20 @@ def test_delete_destination_by_id(mock_save, mock_load, mock_destinations):
     assert result is False
 
 
-@patch("models.destination.load_bookings")
-def test_load_bookings(mock_load, mock_bookings):
+@patch("models.destination.load_bookings")  # Update with correct path
+def test_load_bookings(mock_load):
     """
     Test loading bookings.
     """
-    mock_load.return_value = mock_bookings
+    mock_bookings = [
+        {"id": "abcd", "destination_id": "1234", "user_id": "user1"},
+        {"id": "efgh", "destination_id": "5678", "user_id": "user2"},
+    ]
+    mock_load.return_value = mock_bookings  # Mock return value
 
-    bookings = load_bookings()
+    bookings = load_bookings()  # Call the function under test
 
-    assert len(bookings) == 2
+    assert len(bookings) == 2  # Assert the mocked response is used
     assert bookings[0]["destination_id"] == "1234"
     assert bookings[1]["destination_id"] == "5678"
 
