@@ -67,6 +67,6 @@ FLASK-PYTHON-ASSIGNMENT/
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/srsaurav0/Flask-Python-Assignment.git
    cd travel-api-mvc
    ```
