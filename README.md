@@ -11,12 +11,14 @@ This project is a modular **Travel API** built using Flask, following the **Mode
   - Login functionality with JWT-based authentication.
   - Fetch user profile.
 
-- **Auth Service**:
-  - Admin-only access for specific actions.
-  - Token validation.
-
 - **Destination Service**:
-  - Manage destinations (CRUD operations).
+  - Add new destination (Admin-only)
+  - View all destination
+  - Delete destination by id (Admin-only)
+  - View all bookings (Admin-only)
+
+- **Auth Service**:
+  - Recognizing admin by token.
 
 ---
 
@@ -50,6 +52,21 @@ FLASK-PYTHON-ASSIGNMENT/
 │ ├── views/ 
 │ └── tests/ # Unit tests for Destination Service 
 ├── .gitignore 
-└── README.md 
+├── README.md 
 └── requirements.txt
 ```
+
+## Prerequisites
+
+- Python 3.8+
+- Virtual Environment (optional but recommended)
+
+---
+
+## Installation and Setup
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd travel-api-mvc
+   ```
