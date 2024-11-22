@@ -1,0 +1,35 @@
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment variables and secrets
+.env
+*.env
+
+# Flask temporary files
+instance/
+*.sqlite3
+*.db
+*.log
+
+# Virtual environment directory
+.venv/
+venv/
+
+# Pytest cache and coverage reports
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Swagger UI static files
+swagger_static/
