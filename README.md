@@ -127,7 +127,7 @@ FLASK-PYTHON-ASSIGNMENT/
 
 ---
 
-## **Steps for Using the User Service APIs**
+## **Endpoints**
 
 ### **1. POST /register**
 **Register a New User**
@@ -201,9 +201,21 @@ FLASK-PYTHON-ASSIGNMENT/
 
   ## **Endpoints**
 
-  ### **1. POST /add-destination**
+  ### **1. GET /get-destinations**
+  **Retrieve a list of all destinations.**
+
+  - Click on the `/get-destinations Retrieve All Destinations` endpoint.
+  - Steps:
+    1. Click `Try it out`.
+    2. Click `Execute` to retrieve all destinations.
+  - **Output**: A list of all destinations appears in the `Response body` section.
+
+  ---
+
+  ### **2. POST /add-destination (Admin Specific)**
   **Add a new destination.**
 
+  - Only an admin can access this endpoint. Log in with an admin account using the \login endpoint to generate a bearer token and use the `Authorize` button to authorize as an admin.
   - Click on the `/add-destination Add a New Destination` endpoint.
   - Steps:
     1. Click `Try it out`.
@@ -219,20 +231,10 @@ FLASK-PYTHON-ASSIGNMENT/
 
   ---
 
-  ### **2. GET /get-destinations**
-  **Retrieve a list of all destinations.**
-
-  - Click on the `/get-destinations Retrieve All Destinations` endpoint.
-  - Steps:
-    1. Click `Try it out`.
-    2. Click `Execute` to retrieve all destinations.
-  - **Output**: A list of all destinations appears in the `Response body` section.
-
-  ---
-
-  ### **3. DELETE /delete-destination/{id}**
+  ### **3. DELETE /delete-destination/{id} (Admin Specific)**
   **Delete a specific destination by its ID.**
 
+  - Only an admin can access this endpoint. Log in with an admin account using the \login endpoint to generate a bearer token and use the `Authorize` button to authorize as an admin.
   - Click on the `/delete-destination/{id} Delete Destination by ID` endpoint.
   - Steps:
     1. Click `Try it out`.
@@ -244,27 +246,81 @@ FLASK-PYTHON-ASSIGNMENT/
 
   ---
 
-  ### **4. POST /book-destination**
-  **Book a destination.**
-
-  - Click on the `/book-destination Book a Destination` endpoint.
-  - Steps:
-    1. Click `Try it out`.
-    2. Enter booking details:
-      - `destination_id`: The ID of the destination to book (retrieve from `/get-destinations`).
-      - `user_id`: The ID of the user making the booking.
-      - `arrival_time`: Arrival date and time (ISO 8601 format).
-      - `departure_time`: Departure date and time (ISO 8601 format).
-    3. Click `Execute` to create the booking.
-  - **Data Storage**: Booking details are saved in `destination-service\bookings_data.py`.
-
-  ---
-
-  ### **5. GET /get-bookings**
+  ### **4. GET /get-bookings (Admin Specific)**
   **Retrieve a list of all bookings.**
 
+  - Only an admin can access this endpoint. Log in with an admin account using the \login endpoint to generate a bearer token and use the `Authorize` button to authorize as an admin.
   - Click on the `/get-bookings Retrieve All Bookings` endpoint.
   - Steps:
     1. Click `Try it out`.
     2. Click `Execute` to retrieve all bookings.
   - **Output**: A list of all bookings appears in the `Response body` section.
+  - **Data Storage**: Mock booking details are saved in `destination-service\bookings_data.py`.
+
+
+- The **Auth Service** will run on:  
+  `http://127.0.0.1:5003/apidocs/`
+
+  Navigate to this site to explore and interact with the API endpoints.
+
+---
+# Authentication Service API
+
+## **Steps for Using the Authentication Service APIs**
+To start the authentication service, run the following command:
+   ```bash
+   python auth-service/app.py
+   ```
+
+### **1. GET /auth-endpoint**
+**Admin-Only Access**
+
+- This endpoint is restricted to **Admin users only**.
+
+- To access:
+  1. **Authorize the Token**:
+     - Click on the `Authorize` button (top right corner of the Swagger page).
+     - Enter the **admin token** in the format:  
+       **`Bearer {token}`**  
+       Example: `Bearer abcd.1234.efgh`
+     - Click **`Authorize`**.
+  2. Click on the `/auth-endpoint` endpoint.
+  3. Click the **`Try it out`** button.
+  4. Click **`Execute`** to make the request.
+
+- **Output**:
+  - If the token is valid and belongs to an **Admin**, the response will include:  
+    **`"message": "Admin access granted. User can add or delete destinations and view the bookings"`**
+
+- **Error Scenarios**:
+  - If a non-admin token is used, the response will include:  
+    **`"error": "Admin access required"`**
+  - If no token or an invalid token is provided, an error message will indicate the issue.
+
+---
+
+## **JWT Error Handling**
+
+- **Unauthorized Access**:
+  - If no token is provided:  
+    **`"error": "Missing token: Authorization header not provided"`**
+  
+- **Invalid Token**:
+  - If an invalid token is provided:  
+    **`"error": "Invalid token"`**
+
+- **Expired Token**:
+  - If the token has expired:  
+    **`"error": "Token has expired"`**
+
+- **Revoked Token**:
+  - If the token has been revoked:  
+    **`"error": "Token has been revoked"`**
+
+---
+
+## **Recommendations**
+
+- Always test using both **Admin** and **User** accounts to validate access restrictions.
+- Use valid tokens generated during the `/login` process in the **User Service**.
+- Tokens are time-sensitive, so ensure they are used before they expire.
