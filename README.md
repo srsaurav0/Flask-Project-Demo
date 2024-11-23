@@ -87,6 +87,8 @@ FLASK-PYTHON-ASSIGNMENT/
     ```bash
     source .venv/bin/activate
     ```
+  If successful, your terminal prompt will change to include `(.venv)`.
+
 - For Windows:
   - Create a virtual environment:
     ```bash
@@ -100,3 +102,40 @@ FLASK-PYTHON-ASSIGNMENT/
     ```bash
     .\venv\Scripts\activate
     ```
+  If successful, your terminal prompt will change to include `(.venv)`.
+
+4. Install **project dependencies** inside `requirements.txt` file:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. Environment Setup:
+   Set Environment Variables:
+   ```bash
+   set FLASK_APP=app.py
+   set FLASK_ENV=development
+   ```
+6. Run the App:
+  - Run **User Service**:
+   ```bash
+   python user-service/app.py
+   ```
+  The user service will run on `http://127.0.0.1:5001/apidocs/`. Navigate to this site to use the 3 endpoints.
+  Steps of using the User Service APIs:
+    - **POST /register**
+      - At first create an user. Click on the */register Register a New User* to create an user.
+      - Click on the `Try it out` button to enter your details and then the `Execute` button to complete the registration.
+      - You can define the `role` of an user during the registration process. It can be either an `user` or an `admin` It is recommended to create an `user` account and an `admin` account. The admin account can be used later for access to some **restricted endpoints**.
+      - The user information is stored inside *user-service\user_data.py* file.
+      - Validation is properly implemented in this section. Only one account can be created with a single email.
+    - **POST /login**
+      - Click on the */login Authenticate a User* to log in.
+      - Click on the `Try it out` button to enter your details and then the `Execute` button to complete loggin in.
+      - After successful log in, a `token` will be generated inside the `Response body` section. **Copy** the token (Inside the double quotation)
+      - This `token` is mandatory to access the **/profile** endpoint
+    - **GET ​/profile**
+      - Click on the `Authorize` button on the *top right corner* of the page. The bearer token is needed to be entered here. Inside the `value` field, enter the key copied after the **log in** process using in format `Bearer {key}` (Example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMjM3NjYzNCwianRpIjoiZjk0NjE3NDYtOGM0NC00OTk1LTgwM2QtNDE3YmQzZmQ4MWQxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJveUBleGFtcGxlLmNvbSIsIm5iZiI6MTczMjM3NjYzNCwiY3NyZiI6ImVlNDhjZmJkLWZiMjEtNDMyZC1hOTQ2LWQ1NTIyMTBkYWZlZSIsImV4cCI6MTczMjM3NzUzNCwicm9sZSI6IkFkbWluIn0.Lt1Wg8YSxgEnfTIKx3xrdV4cm896yLE3Ow9he8VdD1g)
+      - Click on the */profile Get Profile Information* to access the user information.
+      - Click on the `Try it out` button to enter your details and then the `Execute` button to complete loggin in.
+      - After successful log in, a `token` will be generated inside the `Response body` section. **Copy** the token (Inside the double quotation)
+      - This `token` is mandatory to access the **/profile** endpoint
