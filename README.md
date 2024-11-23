@@ -70,3 +70,8 @@ FLASK-PYTHON-ASSIGNMENT/
    git clone https://github.com/srsaurav0/Flask-Python-Assignment.git
    cd travel-api-mvc
    ```
+
+ 2. Make sure Python (preferably **3.10+**) is installed on your Windows machine:
+   ```bash
+   python --version
+   ```  
