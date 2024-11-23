@@ -72,10 +72,10 @@ FLASK-PYTHON-ASSIGNMENT/
    ```
 
 2. Make sure Python (preferably **3.10+**) is installed on your Windows machine:
-  ```bash
-  python --version
-  ```
-  If Python is not installed, download it from **python.org** and install it. Ensure you check the box **Add Python to PATH** during installation.
+   ```bash
+   python --version
+   ```
+   If Python is not installed, download it from **python.org** and install it. Ensure you check the box **Add Python to PATH** during installation.
 
 3. Set Up a Virtual Environment:
 - For Linux:
