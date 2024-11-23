@@ -66,12 +66,37 @@ FLASK-PYTHON-ASSIGNMENT/
 ## Installation and Setup
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/srsaurav0/Flask-Python-Assignment.git
-   cd travel-api-mvc
-   ```
+  ```bash
+  git clone https://github.com/srsaurav0/Flask-Python-Assignment.git
+  cd travel-api-mvc
+  ```
 
- 2. Make sure Python (preferably **3.10+**) is installed on your Windows machine:
-   ```bash
-   python --version
-   ```  
+2. Make sure Python (preferably **3.10+**) is installed on your Windows machine:
+  ```bash
+  python --version
+  ```
+If Python is not installed, download it from **python.org** and install it. Ensure you check the box **Add Python to PATH** during installation.
+
+3. Set Up a Virtual Environment:
+- For Linux:
+  - Create a virtual environment:
+    ```bash
+    python3 -m venv .venv
+    ```
+  - Activate the virtual environment:
+    ```bash
+    source .venv/bin/activate
+    ```
+- For Windows:
+  - Create a virtual environment:
+    ```bash
+    python -m venv .venv
+    ```
+  - Change Execution Policy Temporarily:
+    ```bash
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+    ```
+  - .\venv\Scripts\activate:
+    ```bash
+    .\venv\Scripts\activate
+    ```
