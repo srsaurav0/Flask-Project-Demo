@@ -114,30 +114,80 @@ FLASK-PYTHON-ASSIGNMENT/
    ```bash
    set FLASK_APP=app.py
    set FLASK_ENV=development
-   
+
 # User Service API
+  To start the destination service, run the following command:
   ```bash
   python user-service/app.py
   ```
-- The user service will run on `http://127.0.0.1:5001/apidocs/`. Navigate to this site to use the 3 endpoints.
-- Steps of using the User Service APIs:
-  - **POST /register**
-    - At first create an user. Click on the */register Register a New User* to create an user.
-    - Click on the `Try it out` button to enter your details and then the `Execute` button to complete the registration.
-    - You can define the `role` of an user during the registration process. It can be either an `user` or an `admin` It is recommended to create an `user` account and an `admin` account. The admin account can be used later for access to some **restricted endpoints**.
-    - The user information is stored inside *user-service\user_data.py* file.
-    - Validation is properly implemented in this section. Only one account can be created with a single email.
-  - **POST /login**
-    - Click on the */login Authenticate a User* to log in.
-    - Click on the `Try it out` button to enter your details and then the `Execute` button to complete logging in.
-    - After successful log in, a `token` will be generated inside the `Response body` section. *Copy* the token (Inside the double quotation).
-    - This `token` is mandatory to access the **/profile** endpoint
-  - **GET ​/profile**
-    - Click on the `Authorize` button on the *top right corner* of the page. The bearer token is needed to be entered here. Inside the `value` field, enter the key copied after the **log in** process using in format `Bearer {key}` (Example: Bearer abcd.1234.__.alsdf) and click on the `authorize` button.
-    - Click on the */profile Get Profile Information* to access the user information.
-    - Click on the `Try it out` button and then the `Execute` button. The profile information should appear inside the `Response body` section.
+- The **User Service** will run on:  
+  `http://127.0.0.1:5001/apidocs/`
 
-  # Destination Service API
+  Navigate to this site to explore and interact with the API endpoints.
+
+---
+
+## **Steps for Using the User Service APIs**
+
+### **1. POST /register**
+**Register a New User**
+
+- To register a new user:
+  1. Click on the `/register Register a New User` endpoint.
+  2. Click the **`Try it out`** button to enable input fields.
+  3. Enter your user details:
+     - **`email`**: User's email (must be unique).
+     - **`password`**: User's password.
+     - **`name`**: Full name of the user.
+     - **`role`**: Specify the role (`User` or `Admin`).
+  4. Click **`Execute`** to submit the registration request.
+
+- **Recommendations**:
+  - It’s suggested to create at least one **Admin** account and one **User** account for testing purposes. Admin accounts are required for accessing restricted endpoints.
+  - Validation is implemented: Only one account can be created per email.
+
+- **Data Storage**:
+  - User information is stored in the `user-service\user_data.py` file.
+
+---
+
+### **2. POST /login**
+**Authenticate a User**
+
+- To log in:
+  1. Click on the `/login Authenticate a User` endpoint.
+  2. Click the **`Try it out`** button to enable input fields.
+  3. Enter the following details:
+     - **`email`**: Registered email of the user.
+     - **`password`**: Password associated with the account.
+  4. Click **`Execute`** to authenticate.
+
+- **Output**:
+  - On successful login, a **token** will be generated and displayed in the `Response body`.  
+  - **Important**: Copy the token (inside the double quotes) for use in the `/profile` endpoint.
+
+---
+
+### **3. GET /profile**
+**Access User Profile Information**
+
+- To access profile details:
+  1. **Authorize the Token**:
+     - Click on the `Authorize` button (top right corner of the Swagger page).
+     - Paste the copied token from the login step in the format:  
+       **`Bearer {token}`**  
+       Example: `Bearer abcd.1234.efgh`
+     - Click **`Authorize`**.
+  2. Click on the `/profile Get Profile Information` endpoint.
+  3. Click the **`Try it out`** button.
+  4. Click **`Execute`** to retrieve the profile.
+
+- **Output**:
+  - User profile information will be displayed in the `Response body`. This includes:
+    - **Email**
+    - **Role**
+
+# Destination Service API
   To start the destination service, run the following command:
    ```bash
    python destination-service/app.py
