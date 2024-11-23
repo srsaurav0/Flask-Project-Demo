@@ -258,19 +258,19 @@ FLASK-PYTHON-ASSIGNMENT/
   - **Data Storage**: Mock booking details are saved in `destination-service\bookings_data.py`.
 
 
+# Authentication Service API
+
+## **Steps for Using the Authentication Service APIs**
+- To start the authentication service, run the following command:
+   ```bash
+   python auth-service/app.py
+   ```
 - The **Auth Service** will run on:  
   `http://127.0.0.1:5003/apidocs/`
 
   Navigate to this site to explore and interact with the API endpoints.
 
 ---
-# Authentication Service API
-
-## **Steps for Using the Authentication Service APIs**
-To start the authentication service, run the following command:
-   ```bash
-   python auth-service/app.py
-   ```
 
 ### **1. GET /auth-endpoint**
 **Admin-Only Access**
