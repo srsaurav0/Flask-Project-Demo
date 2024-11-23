@@ -117,9 +117,9 @@ FLASK-PYTHON-ASSIGNMENT/
    ```
 6. Run the App:
   - Run **User Service**:
-   ```bash
-   python user-service/app.py
-   ```
+    ```bash
+    python user-service/app.py
+    ```
   - The user service will run on `http://127.0.0.1:5001/apidocs/`. Navigate to this site to use the 3 endpoints.
   - Steps of using the User Service APIs:
     - **POST /register**
