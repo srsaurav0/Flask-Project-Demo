@@ -134,7 +134,7 @@ FLASK-PYTHON-ASSIGNMENT/
       - After successful log in, a `token` will be generated inside the `Response body` section. **Copy** the token (Inside the double quotation)
       - This `token` is mandatory to access the **/profile** endpoint
     - **GET ​/profile**
-      - Click on the `Authorize` button on the *top right corner* of the page. The bearer token is needed to be entered here. Inside the `value` field, enter the key copied after the **log in** process using in format `Bearer {key}` (Example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMjM3NjYzNCwianRpIjoiZjk0NjE3NDYtOGM0NC00OTk1LTgwM2QtNDE3YmQzZmQ4MWQxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJveUBleGFtcGxlLmNvbSIsIm5iZiI6MTczMjM3NjYzNCwiY3NyZiI6ImVlNDhjZmJkLWZiMjEtNDMyZC1hOTQ2LWQ1NTIyMTBkYWZlZSIsImV4cCI6MTczMjM3NzUzNCwicm9sZSI6IkFkbWluIn0.Lt1Wg8YSxgEnfTIKx3xrdV4cm896yLE3Ow9he8VdD1g)
+      - Click on the `Authorize` button on the *top right corner* of the page. The bearer token is needed to be entered here. Inside the `value` field, enter the key copied after the **log in** process using in format `Bearer {key}` (Example: Bearer abcd.1234.__.alsdf)
       - Click on the */profile Get Profile Information* to access the user information.
       - Click on the `Try it out` button to enter your details and then the `Execute` button to complete loggin in.
       - After successful log in, a `token` will be generated inside the `Response body` section. **Copy** the token (Inside the double quotation)
