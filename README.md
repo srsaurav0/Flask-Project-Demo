@@ -331,34 +331,39 @@ FLASK-PYTHON-ASSIGNMENT/
 To ensure that the application works as expected, testing has been set up using **pytest**. Below are the steps and commands to run the tests:
 
 ### Running Tests
-Run all the tests for the **user-service** module:
-```bash
-pytest user-service
-```
+-  Run all the tests for the **user-service** module:
+    ```bash
+    pytest user-service
+    ```
+-  Run all the tests for the **destination-service** module:
+    ```bash
+    pytest destination-service
+    ```
+-  Run all the tests for the **authentication-service** module:
+    ```bash
+    pytest auth-service
+    ```
 
 ### Checking Test Coverage
-To check test coverage and get a summary report:
-```bash
-pytest --cov=user-service user-service
-```
-
-### Viewing Detailed Coverage
-Generate an HTML report for detailed coverage analysis:
-```bash
-pytest --cov=user-service --cov-report=html user-service
-```
-Open the report by navigating to `htmlcov/index.html` in your browser.
-
-### Combined Coverage for Multiple Services
-If you want to run tests and generate coverage reports for multiple services, use the following command:
-```bash
-pytest --cov=user-service --cov=destination-service --cov-report=term-missing
-```
+-  To check test coverage and get a summary report for the **user-service** module:
+    ```bash
+    pytest --cov=user-service user-service
+    ```
+-  To check test coverage and get a summary report for the **destination-service** module:
+    ```bash
+    pytest --cov=destination-service destination-service
+    ```
+-  To check test coverage and get a summary report for the **authentication-service** module:
+    ```bash
+    pytest --cov=auth-service auth-service
+    ```
 
 ### Viewing Missing Lines in Coverage
 To see which lines of code are not covered by your tests, use:
 ```bash
 pytest --cov=user-service --cov-report=term-missing user-service
+pytest --cov=destination-service --cov-report=term-missing destination-service
+pytest --cov=auth-service --cov-report=term-missing auth-service
 ```
 
 ### Setting Up Tests
