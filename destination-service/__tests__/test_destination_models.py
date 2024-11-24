@@ -1,8 +1,6 @@
 import pytest
 from unittest.mock import patch
 from models.destination import (
-    load_destinations,
-    save_destinations,
     add_destination,
     delete_destination_by_id,
     load_bookings,
@@ -34,19 +32,26 @@ def mock_bookings():
 
 @patch("models.destination.load_destinations")
 @patch("models.destination.save_destinations")
-def test_add_destination(mock_save, mock_load, mock_destinations):
+@patch("models.destination.generate_unique_id")
+def test_add_destination(mock_generate_id, mock_save, mock_load, mock_destinations):
     """
     Test adding a new destination.
     """
     mock_load.return_value = mock_destinations
+    mock_generate_id.return_value = "mocked-id"
     new_destination = {"name": "Tokyo", "country": "Japan"}
 
     added_destination = add_destination(new_destination)
 
-    assert added_destination["id"] is not None
-    assert added_destination["name"] == "Tokyo"
-    assert added_destination["country"] == "Japan"
-    mock_save.assert_called_once()
+    expected_destinations = [
+        {"id": "1234", "name": "Paris", "country": "France"},
+        {"id": "5678", "name": "New York", "country": "USA"},
+        {"id": "mocked-id", "name": "Tokyo", "country": "Japan"},
+    ]
+
+    assert added_destination == {"id": "mocked-id", "name": "Tokyo", "country": "Japan"}
+    mock_save.assert_called_once_with(expected_destinations)
+    mock_generate_id.assert_called_once()
 
 
 @patch("models.destination.load_destinations")
@@ -60,33 +65,34 @@ def test_delete_destination_by_id(mock_save, mock_load, mock_destinations):
     result = delete_destination_by_id("1234")  # ID to delete
     assert result is True
 
-    # Ensure save_destinations was called with updated data
-    updated_destinations = [
-        {"id": "5678", "name": "New York", "country": "USA"}
-    ]
+    updated_destinations = [{"id": "5678", "name": "New York", "country": "USA"}]
     mock_save.assert_called_once_with(updated_destinations)
 
-    # Test deleting a non-existent ID
     result = delete_destination_by_id("non-existent-id")
     assert result is False
 
 
-@patch("models.destination.load_bookings")  # Update with correct path
+@patch("models.destination.load_bookings")  # Correct path for patching
 def test_load_bookings(mock_load):
     """
     Test loading bookings.
     """
+    # Mock data for bookings
     mock_bookings = [
         {"id": "abcd", "destination_id": "1234", "user_id": "user1"},
         {"id": "efgh", "destination_id": "5678", "user_id": "user2"},
     ]
-    mock_load.return_value = mock_bookings  # Mock return value
 
-    bookings = load_bookings()  # Call the function under test
+    # Set the mock's return value
+    mock_load.return_value = mock_bookings
 
-    assert len(bookings) == 2  # Assert the mocked response is used
-    assert bookings[0]["destination_id"] == "1234"
-    assert bookings[1]["destination_id"] == "5678"
+    # Call the function under test
+    bookings = load_bookings()
+
+    # Assertions
+    assert len(bookings) == 2  # Verify the length of mocked data
+    assert bookings == mock_bookings  # Verify the returned data matches the mock
+    mock_load.assert_called_once()  # Ensure the mocked function was called once
 
 
 @patch("models.destination.generate_unique_id")
@@ -94,6 +100,12 @@ def test_generate_unique_id(mock_generate):
     """
     Test unique ID generation.
     """
+    # Configure the mock to return a specific value
     mock_generate.return_value = "mocked-uuid"
+
+    # Call the function under test
     unique_id = generate_unique_id()
-    assert unique_id == "mocked-uuid"
+
+    # Assertions
+    assert unique_id == "mocked-uuid"  # Verify the mock value is returned
+    mock_generate.assert_called_once()  # Confirm the mock was called once
