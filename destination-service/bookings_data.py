@@ -6,7 +6,7 @@ bookings = [
         "departure_time": "2024-12-01T08:00:00",
         "arrival_time": "2024-12-01T12:30:00",
         "destination": "Paris",
-        "stay_duration_days": 5
+        "stay_duration_days": 5,
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@ bookings = [
         "departure_time": "2024-12-05T10:00:00",
         "arrival_time": "2024-12-05T14:30:00",
         "destination": "New York",
-        "stay_duration_days": 7
+        "stay_duration_days": 7,
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@ bookings = [
         "departure_time": "2024-12-10T09:00:00",
         "arrival_time": "2024-12-10T13:15:00",
         "destination": "Tokyo",
-        "stay_duration_days": 10
+        "stay_duration_days": 10,
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@ bookings = [
         "departure_time": "2024-12-15T06:00:00",
         "arrival_time": "2024-12-15T10:45:00",
         "destination": "Sydney",
-        "stay_duration_days": 14
+        "stay_duration_days": 14,
     },
     {
         "id": 5,
@@ -42,6 +42,6 @@ bookings = [
         "departure_time": "2024-12-20T20:00:00",
         "arrival_time": "2024-12-21T00:30:00",
         "destination": "London",
-        "stay_duration_days": 3
-    }
+        "stay_duration_days": 3,
+    },
 ]

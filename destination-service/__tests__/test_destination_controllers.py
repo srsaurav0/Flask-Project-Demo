@@ -14,7 +14,12 @@ def mock_destinations():
     Provide mock destinations data.
     """
     return [
-        {"id": "1", "name": "Paris", "description": "City of Lights", "location": "France"},
+        {
+            "id": "1",
+            "name": "Paris",
+            "description": "City of Lights",
+            "location": "France",
+        },
         {"id": "2", "name": "New York", "description": "Big Apple", "location": "USA"},
     ]
 
@@ -61,7 +66,11 @@ def test_create_destination_success(mock_add_destination):
     }
 
     # Input data for the controller
-    data = {"name": "Tokyo", "description": "Land of the Rising Sun", "location": "Japan"}
+    data = {
+        "name": "Tokyo",
+        "description": "Land of the Rising Sun",
+        "location": "Japan",
+    }
 
     # Call the function under test
     new_destination = create_destination(data)
@@ -72,12 +81,13 @@ def test_create_destination_success(mock_add_destination):
     assert new_destination["location"] == "Japan"
 
     # Verify the mock was called with the correct data
-    mock_add_destination.assert_called_once_with({
-        "name": "Tokyo",
-        "description": "Land of the Rising Sun",
-        "location": "Japan",
-    })
-
+    mock_add_destination.assert_called_once_with(
+        {
+            "name": "Tokyo",
+            "description": "Land of the Rising Sun",
+            "location": "Japan",
+        }
+    )
 
 
 def test_create_destination_missing_fields():
@@ -89,7 +99,9 @@ def test_create_destination_missing_fields():
         create_destination(data)
 
 
-@patch("controllers.destination.delete_destination_by_id")  # Correct path to the imported function
+@patch(
+    "controllers.destination.delete_destination_by_id"
+)  # Correct path to the imported function
 def test_remove_destination_success(mock_delete_destination):
     """
     Test remove_destination controller for successful deletion.
@@ -107,7 +119,9 @@ def test_remove_destination_success(mock_delete_destination):
     mock_delete_destination.assert_called_once_with("1")
 
 
-@patch("controllers.destination.delete_destination_by_id")  # Correct path to the imported function
+@patch(
+    "controllers.destination.delete_destination_by_id"
+)  # Correct path to the imported function
 def test_remove_destination_failure(mock_delete_destination):
     """
     Test remove_destination controller for failure case.

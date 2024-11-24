@@ -1,1 +1,20 @@
-destinations = [{'name': 'Paris', 'description': 'City of Lights', 'location': 'France', 'id': 'f624c7b4-07a2-4582-9889-1c1f5d62e474'}, {'name': 'Dhaka', 'description': 'City of Dust', 'location': 'Bangladesh', 'id': '5afac309-3855-4cf9-b959-61204a9e625f'}, {'name': 'Mumbai', 'description': 'City of Acting', 'location': 'India', 'id': 'bf68a3b1-1a07-4948-ab68-db6d7526f982'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': 'c07aeab8-21e9-4fe1-8bca-dc6ff4384b1b'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '2ce10a4f-cbf0-436b-b30e-d52a6e95a11f'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': 'd94ddc5e-a95b-475e-bad0-224db27d510e'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '10367afb-1cfd-49eb-bd58-049008aeefa2'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '67181373-7110-4ea5-8fce-1bfbc5cf29be'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '991bf79b-53c0-48aa-9b72-46f89cea6183'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '4e737b2d-7b57-4063-80b8-e32da75199b1'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '9a121a4a-19e7-4152-8882-ce6ab1f9ae00'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': '0a025b3a-d0b6-4fde-9878-179073317d8c'}, {'name': 'Tokyo', 'description': 'Land of the Rising Sun', 'location': 'Japan', 'id': 'b6db92c0-530d-4b52-88c8-b09f19c17d96'}]
+destinations = [
+    {
+        "name": "Paris",
+        "description": "City of Lights",
+        "location": "France",
+        "id": "f624c7b4-07a2-4582-9889-1c1f5d62e474",
+    },
+    {
+        "name": "Dhaka",
+        "description": "City of Dust",
+        "location": "Bangladesh",
+        "id": "5afac309-3855-4cf9-b959-61204a9e625f",
+    },
+    {
+        "name": "Mumbai",
+        "description": "City of Acting",
+        "location": "India",
+        "id": "bf68a3b1-1a07-4948-ab68-db6d7526f982",
+    },
+]

@@ -22,21 +22,25 @@ def setup_and_teardown():
     Set up a clean test environment by backing up the original user_data.py
     and restoring it after the tests.
     """
+    backup_file = f"{USER_DATA_FILE}.bak"
+
     # Backup the original user_data.py file
     if os.path.exists(USER_DATA_FILE):
-        os.rename(USER_DATA_FILE, f"{USER_DATA_FILE}.bak")
+        if os.path.exists(backup_file):
+            os.remove(backup_file)  # Remove existing backup
+        os.rename(USER_DATA_FILE, backup_file)
 
-    try:
-        # Create a clean user_data.py file for testing
-        with open(USER_DATA_FILE, "w") as file:
-            file.write("users = []")
+    # Create a clean user_data.py for testing
+    with open(USER_DATA_FILE, "w") as file:
+        file.write("users = []")  # Start with an empty list
 
-        yield  # Run the tests
+    yield  # This is where the tests will run
 
-    finally:
-        # Restore the original user_data.py after tests
-        if os.path.exists(f"{USER_DATA_FILE}.bak"):
-            os.rename(f"{USER_DATA_FILE}.bak", USER_DATA_FILE)
+    # Restore the original user_data.py file
+    if os.path.exists(backup_file):
+        if os.path.exists(USER_DATA_FILE):
+            os.remove(USER_DATA_FILE)  # Remove test file
+        os.rename(backup_file, USER_DATA_FILE)
 
 
 def test_load_users_empty():

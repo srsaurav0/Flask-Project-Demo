@@ -31,7 +31,9 @@ def admin_token(app):
     Generate a valid JWT token for an admin.
     """
     with app.test_request_context():
-        return create_access_token(identity="admin@example.com", additional_claims={"role": "Admin"})
+        return create_access_token(
+            identity="admin@example.com", additional_claims={"role": "Admin"}
+        )
 
 
 @pytest.fixture
@@ -40,7 +42,9 @@ def user_token(app):
     Generate a valid JWT token for a regular user.
     """
     with app.test_request_context():
-        return create_access_token(identity="user@example.com", additional_claims={"role": "User"})
+        return create_access_token(
+            identity="user@example.com", additional_claims={"role": "User"}
+        )
 
 
 @patch("views.destination.fetch_all_destinations")
@@ -50,7 +54,12 @@ def test_get_destinations(mock_fetch, client):
     """
     # Define mock destinations to return
     mock_destinations = [
-        {"id": "1", "name": "Paris", "description": "City of Lights", "location": "France"},
+        {
+            "id": "1",
+            "name": "Paris",
+            "description": "City of Lights",
+            "location": "France",
+        },
         {"id": "2", "name": "New York", "description": "Big Apple", "location": "USA"},
     ]
     # Mock the controller function
@@ -63,8 +72,6 @@ def test_get_destinations(mock_fetch, client):
     assert response.status_code == 200
     assert response.get_json() == mock_destinations
     mock_fetch.assert_called_once()  # Ensure the mock was called
-
-
 
 
 @patch("views.destination.create_destination")
@@ -81,7 +88,11 @@ def test_add_destination_success(mock_create, client, admin_token):
     }
 
     # Data to be sent in the POST request
-    data = {"name": "Tokyo", "description": "Land of the Rising Sun", "location": "Japan"}
+    data = {
+        "name": "Tokyo",
+        "description": "Land of the Rising Sun",
+        "location": "Japan",
+    }
 
     # Make a POST request to add a destination
     response = client.post(
@@ -99,12 +110,15 @@ def test_add_destination_success(mock_create, client, admin_token):
     mock_create.assert_called_once_with(data)
 
 
-
 def test_add_destination_unauthorized(client, user_token):
     """
     Test adding a destination as a regular user (unauthorized).
     """
-    data = {"name": "Tokyo", "description": "Land of the Rising Sun", "location": "Japan"}
+    data = {
+        "name": "Tokyo",
+        "description": "Land of the Rising Sun",
+        "location": "Japan",
+    }
     response = client.post(
         "/destinations",
         json=data,
@@ -135,7 +149,6 @@ def test_delete_destination_success(mock_remove, client, admin_token):
     mock_remove.assert_called_once_with("1")
 
 
-
 def test_delete_destination_unauthorized(client, user_token):
     """
     Test deleting a destination as a regular user (unauthorized).
@@ -147,7 +160,7 @@ def test_delete_destination_unauthorized(client, user_token):
     assert response.get_json()["error"] == "Access denied. Admins only."
 
 
-@patch("controllers.destination.get_all_bookings")
+@patch("views.destination.get_all_bookings")
 def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
     """
     Test viewing all bookings as admin.
@@ -174,27 +187,32 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
         },
     ]
 
-    # Mock the `get_all_bookings` function to return the mock data
+    # Mock `get_all_bookings` to return mock_bookings
     mock_get_bookings.return_value = mock_bookings
 
     # Make the GET request to the `/bookings` endpoint
-    response = client.get("/bookings", headers={"Authorization": f"Bearer {admin_token}"})
+    response = client.get(
+        "/bookings", headers={"Authorization": f"Bearer {admin_token}"}
+    )
+
+    # Debug: Ensure the mock is called
+    print("Mock called:", mock_get_bookings.call_count)
+    mock_get_bookings.assert_called_once()
 
     # Assert the response status code
     assert response.status_code == 200
 
     # Assert the response matches the mock data
-    assert response.get_json() == mock_bookings
-
-    # Ensure the mock function was called once
-    mock_get_bookings.assert_called_once()
-
+    response_data = response.get_json()
+    assert response_data == mock_bookings
 
 
 def test_view_all_bookings_unauthorized(client, user_token):
     """
     Test viewing all bookings as a regular user (unauthorized).
     """
-    response = client.get("/bookings", headers={"Authorization": f"Bearer {user_token}"})
+    response = client.get(
+        "/bookings", headers={"Authorization": f"Bearer {user_token}"}
+    )
     assert response.status_code == 403
     assert response.get_json()["error"] == "Access denied. Admins only."

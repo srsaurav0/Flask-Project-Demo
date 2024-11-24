@@ -95,7 +95,7 @@ def test_load_bookings(mock_load):
     mock_load.assert_called_once()  # Ensure the mocked function was called once
 
 
-@patch("models.destination.generate_unique_id")
+@patch("controllers.destination.generate_unique_id")  # Correct path for patching
 def test_generate_unique_id(mock_generate):
     """
     Test unique ID generation.
@@ -103,8 +103,14 @@ def test_generate_unique_id(mock_generate):
     # Configure the mock to return a specific value
     mock_generate.return_value = "mocked-uuid"
 
+    # Debugging: Verify if the mock is being applied
+    print("Mock setup complete")
+
     # Call the function under test
     unique_id = generate_unique_id()
+
+    # Debugging: Check if the mock was called
+    print("Mock called:", mock_generate.call_count)
 
     # Assertions
     assert unique_id == "mocked-uuid"  # Verify the mock value is returned

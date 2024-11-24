@@ -58,7 +58,7 @@ def admin_token(app):
     with app.test_request_context():
         token = create_access_token(
             identity="admin@example.com",  # Set identity to a string
-            additional_claims={"role": "Admin"}  # Add role as a custom claim
+            additional_claims={"role": "Admin"},  # Add role as a custom claim
         )
         print("Generated Admin Token:", token)
     return token
@@ -72,7 +72,7 @@ def user_token(app):
     with app.test_request_context():
         token = create_access_token(
             identity="user@example.com",  # Set identity to a string
-            additional_claims={"role": "User"}  # Add role as a custom claim
+            additional_claims={"role": "User"},  # Add role as a custom claim
         )
         print("Generated User Token:", token)
     return token
@@ -96,9 +96,7 @@ def test_auth_endpoint_admin_access(client, admin_token):
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     assert response.status_code == 200
-    assert response.get_json() == {
-        "message": "Admin access granted"
-    }
+    assert response.get_json() == {"message": "Admin access granted"}
 
 
 def test_auth_endpoint_non_admin_access(client, user_token):

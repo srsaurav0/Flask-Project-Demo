@@ -1,4 +1,8 @@
-from models.user import load_users, save_users, find_user_by_email, add_user, validate_password
+from models.user import (
+    find_user_by_email,
+    add_user,
+    validate_password,
+)
 from werkzeug.security import generate_password_hash
 
 

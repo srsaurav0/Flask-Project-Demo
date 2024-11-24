@@ -3,6 +3,7 @@ from flask_jwt_extended import JWTManager
 from flasgger import Swagger
 from views.auth import auth_blueprint
 
+
 app = Flask(__name__)
 
 # JWT Configuration
@@ -65,7 +66,7 @@ swagger = Swagger(
             }
         },
         "security": [{"Bearer": []}],
-    }
+    },
 )
 
 # Register the auth blueprint

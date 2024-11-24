@@ -1,5 +1,10 @@
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
+from flask_jwt_extended import (
+    create_access_token,
+    jwt_required,
+    get_jwt_identity,
+    get_jwt,
+)
 from controllers.user import register_user, authenticate_user, fetch_profile
 
 
@@ -79,7 +84,9 @@ def login():
     try:
         data = request.get_json()
         user = authenticate_user(data)
-        token = create_access_token(identity=user["email"], additional_claims={"role": user["role"]})
+        token = create_access_token(
+            identity=user["email"], additional_claims={"role": user["role"]}
+        )
         return jsonify({"token": token}), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400

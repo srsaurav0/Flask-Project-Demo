@@ -53,7 +53,12 @@ def test_get_destinations(mock_fetch, client):
     Test retrieving all destinations.
     """
     mock_destinations = [
-        {"id": "1", "name": "Paris", "description": "City of Lights", "location": "France"},
+        {
+            "id": "1",
+            "name": "Paris",
+            "description": "City of Lights",
+            "location": "France",
+        },
         {"id": "2", "name": "New York", "description": "Big Apple", "location": "USA"},
     ]
     mock_fetch.return_value = mock_destinations
@@ -69,7 +74,6 @@ def test_get_destinations(mock_fetch, client):
     mock_fetch.assert_called_once()
 
 
-
 @patch("views.destination.create_destination")  # Ensure the correct path is patched
 def test_add_destination_success(mock_create, client, admin_token):
     """
@@ -81,7 +85,11 @@ def test_add_destination_success(mock_create, client, admin_token):
         "description": "Land of the Rising Sun",
         "location": "Japan",
     }
-    data = {"name": "Tokyo", "description": "Land of the Rising Sun", "location": "Japan"}
+    data = {
+        "name": "Tokyo",
+        "description": "Land of the Rising Sun",
+        "location": "Japan",
+    }
     response = client.post(
         "/destinations",
         json=data,
@@ -97,12 +105,15 @@ def test_add_destination_success(mock_create, client, admin_token):
     mock_create.assert_called_once_with(data)
 
 
-
 def test_add_destination_unauthorized(client, user_token):
     """
     Test adding a destination as a non-admin user.
     """
-    data = {"name": "Tokyo", "description": "Land of the Rising Sun", "location": "Japan"}
+    data = {
+        "name": "Tokyo",
+        "description": "Land of the Rising Sun",
+        "location": "Japan",
+    }
     response = client.post(
         "/destinations",
         json=data,
@@ -132,7 +143,6 @@ def test_delete_destination_success(mock_remove, client, admin_token):
     mock_remove.assert_called_once_with("1")
 
 
-
 def test_delete_destination_unauthorized(client, user_token):
     """
     Test deleting a destination as a non-admin user.
@@ -144,7 +154,7 @@ def test_delete_destination_unauthorized(client, user_token):
     assert response.get_json()["error"] == "Access denied. Admins only."
 
 
-@patch("controllers.destination.get_all_bookings")
+@patch("views.destination.get_all_bookings")
 def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
     """
     Test viewing all bookings as admin.
@@ -175,7 +185,9 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
     mock_get_bookings.return_value = mock_bookings
 
     # Make the GET request
-    response = client.get("/bookings", headers={"Authorization": f"Bearer {admin_token}"})
+    response = client.get(
+        "/bookings", headers={"Authorization": f"Bearer {admin_token}"}
+    )
 
     # Assertions
     assert response.status_code == 200
@@ -183,14 +195,13 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
     mock_get_bookings.assert_called_once()  # Verify the mock was called
 
 
-
-
-
 def test_view_all_bookings_unauthorized(client, user_token):
     """
     Test viewing all bookings as a non-admin user.
     """
-    response = client.get("/bookings", headers={"Authorization": f"Bearer {user_token}"})
+    response = client.get(
+        "/bookings", headers={"Authorization": f"Bearer {user_token}"}
+    )
     assert response.status_code == 403
     assert response.get_json()["error"] == "Access denied. Admins only."
 

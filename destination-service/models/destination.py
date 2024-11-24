@@ -2,6 +2,7 @@ import os
 import ast
 import uuid
 
+
 DESTINATION_DATA_FILE = os.path.join(
     os.path.dirname(__file__), "../destination_data.py"
 )
