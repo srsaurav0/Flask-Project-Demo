@@ -324,3 +324,53 @@ FLASK-PYTHON-ASSIGNMENT/
 - Always test using both **Admin** and **User** accounts to validate access restrictions.
 - Use valid tokens generated during the `/login` process in the **User Service**.
 - Tokens are time-sensitive, so ensure they are used before they expire.
+
+
+## Testing
+
+To ensure that the application works as expected, testing has been set up using **pytest**. Below are the steps and commands to run the tests:
+
+### Running Tests
+Run all the tests for the **user-service** module:
+```bash
+pytest user-service
+```
+
+### Checking Test Coverage
+To check test coverage and get a summary report:
+```bash
+pytest --cov=user-service user-service
+```
+
+### Viewing Detailed Coverage
+Generate an HTML report for detailed coverage analysis:
+```bash
+pytest --cov=user-service --cov-report=html user-service
+```
+Open the report by navigating to `htmlcov/index.html` in your browser.
+
+### Combined Coverage for Multiple Services
+If you want to run tests and generate coverage reports for multiple services, use the following command:
+```bash
+pytest --cov=user-service --cov=destination-service --cov-report=term-missing
+```
+
+### Viewing Missing Lines in Coverage
+To see which lines of code are not covered by your tests, use:
+```bash
+pytest --cov=user-service --cov-report=term-missing user-service
+```
+
+### Setting Up Tests
+Tests are written for the following modules:
+- **Models**: Tests functionality related to data handling and operations.
+- **Controllers**: Tests business logic and request handling.
+- **Views**: Tests API endpoints and ensures they return the correct responses.
+
+Before running tests:
+1. Ensure your virtual environment is activated.
+2. Install all required dependencies using:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
