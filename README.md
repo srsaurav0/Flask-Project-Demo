@@ -68,7 +68,7 @@ FLASK-PYTHON-ASSIGNMENT/
 1. Clone the repository:
    ```bash
    git clone https://github.com/srsaurav0/Flask-Python-Assignment.git
-   cd travel-api-mvc
+   cd Flask-Python-Assignment
    ```
 
 2. Make sure Python (preferably **3.10+**) is installed on your Windows machine:
