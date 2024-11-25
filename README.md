@@ -71,9 +71,9 @@ FLASK-PYTHON-ASSIGNMENT/
    cd Flask-Python-Assignment
    ```
 
-2. Make sure Python (preferably **3.10+**) is installed on your Windows machine:
+2. Make sure Python (preferably **3.10+**) is installed on your Linux or Windows machine:
    ```bash
-   python --version
+   python3 --version
    ```
    If Python is not installed, download it from **python.org** and install it. Ensure you check the box **Add Python to PATH** during installation.
 
