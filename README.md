@@ -121,7 +121,7 @@ FLASK-PYTHON-ASSIGNMENT/
   python user-service/app.py
   ```
 - The **User Service** will run on:  
-  `http://127.0.0.1:5001/apidocs/`
+  `http://127.0.0.1:5002/apidocs/`
 
   Navigate to this site to explore and interact with the API endpoints.
 
@@ -193,7 +193,7 @@ FLASK-PYTHON-ASSIGNMENT/
    python destination-service/app.py
    ```
   The destination service will be accessible at:  
-  `http://127.0.0.1:5002/apidocs/`
+  `http://127.0.0.1:5001/apidocs/`
 
   Navigate to this URL to use the available endpoints.
 
