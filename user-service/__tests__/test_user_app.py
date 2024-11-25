@@ -58,21 +58,19 @@ def setup_test_users(mocker):
         {
             "email": "user@example.com",
             "name": "Test User",
-            "password": generate_password_hash("password_user"),  # Hashed password
+            "password": generate_password_hash("password_user"),
             "role": "User",
         },
         {
             "email": "admin@example.com",
             "name": "Admin User",
-            "password": generate_password_hash("password_admin"),  # Hashed password
+            "password": generate_password_hash("password_admin"),
             "role": "Admin",
         },
     ]
 
-    # Mock `load_users` to return test_users
     mocker.patch("models.user.load_users", return_value=test_users)
 
-    # Mock `save_users` to avoid modifying actual data
     mocker.patch("models.user.save_users")
 
 
@@ -104,7 +102,6 @@ def test_swagger_ui_access(client):
     """
     response = client.get("/apidocs/")
     assert response.status_code == 200
-    # Verify that some consistent text from Swagger UI is present
     assert b"Swagger UI" in response.data or b"swagger-ui" in response.data
 
 

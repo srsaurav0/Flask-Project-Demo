@@ -1,7 +1,7 @@
 import pytest
 from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token
-from flasgger import Swagger  # Import Swagger for proper initialization
+from flasgger import Swagger
 from views.auth import auth_blueprint
 
 
@@ -14,7 +14,6 @@ def app():
     app.config["JWT_SECRET_KEY"] = "shared-secret-key"
     JWTManager(app)
 
-    # Initialize Flasgger for Swagger UI
     Swagger(
         app,
         template={
@@ -50,8 +49,8 @@ def admin_token(app):
     """
     with app.test_request_context():
         token = create_access_token(
-            identity="admin@example.com",  # Set identity to a string
-            additional_claims={"role": "Admin"},  # Add role as a custom claim
+            identity="admin@example.com",
+            additional_claims={"role": "Admin"},
         )
         print("Generated Admin Token:", token)
     return token
@@ -64,8 +63,8 @@ def user_token(app):
     """
     with app.test_request_context():
         token = create_access_token(
-            identity="user@example.com",  # Set identity to a string
-            additional_claims={"role": "User"},  # Add role as a custom claim
+            identity="user@example.com",
+            additional_claims={"role": "User"},
         )
         print("Generated User Token:", token)
     return token

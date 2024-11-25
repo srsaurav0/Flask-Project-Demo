@@ -45,10 +45,8 @@ def mock_user_data(mocker):
         },
     ]
 
-    # Mock `load_users` to return test_users
     mocker.patch("models.user.load_users", return_value=test_users)
 
-    # Mock `save_users` to do nothing
     mocker.patch("models.user.save_users")
 
 

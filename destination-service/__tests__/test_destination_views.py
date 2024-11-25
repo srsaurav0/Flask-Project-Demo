@@ -47,7 +47,7 @@ def user_token(app):
         )
 
 
-@patch("views.destination.fetch_all_destinations")  # Ensure the correct import path
+@patch("views.destination.fetch_all_destinations")
 def test_get_destinations(mock_fetch, client):
     """
     Test retrieving all destinations.
@@ -66,7 +66,6 @@ def test_get_destinations(mock_fetch, client):
     response = client.get("/destinations")
     assert response.status_code == 200
 
-    # Use sorted comparison if IDs or ordering differ
     response_data = response.get_json()
     assert sorted(response_data, key=lambda x: x["id"]) == sorted(
         mock_destinations, key=lambda x: x["id"]
@@ -74,7 +73,7 @@ def test_get_destinations(mock_fetch, client):
     mock_fetch.assert_called_once()
 
 
-@patch("views.destination.create_destination")  # Ensure the correct path is patched
+@patch("views.destination.create_destination")
 def test_add_destination_success(mock_create, client, admin_token):
     """
     Test adding a destination as admin.
@@ -96,12 +95,10 @@ def test_add_destination_success(mock_create, client, admin_token):
         headers={"Authorization": f"Bearer {admin_token}"},
     )
 
-    # Assertions for response
     assert response.status_code == 201
     assert response.get_json()["message"] == "Destination added successfully"
     assert response.get_json()["destination"]["name"] == "Tokyo"
 
-    # Assertion for mocked function
     mock_create.assert_called_once_with(data)
 
 
@@ -123,23 +120,20 @@ def test_add_destination_unauthorized(client, user_token):
     assert response.get_json()["error"] == "Access denied. Admins only."
 
 
-@patch("views.destination.remove_destination")  # Ensure the correct path is patched
+@patch("views.destination.remove_destination")
 def test_delete_destination_success(mock_remove, client, admin_token):
     """
     Test deleting a destination as admin.
     """
-    # Mock the remove_destination function to simulate successful deletion
     mock_remove.return_value = True
 
     response = client.delete(
         "/destinations/1", headers={"Authorization": f"Bearer {admin_token}"}
     )
 
-    # Assertions
     assert response.status_code == 200
     assert response.get_json()["message"] == "Destination deleted successfully"
 
-    # Verify the mock was called with the correct destination ID
     mock_remove.assert_called_once_with("1")
 
 
@@ -159,7 +153,6 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
     """
     Test viewing all bookings as admin.
     """
-    # Mock data aligned with actual bookings structure
     mock_bookings = [
         {
             "id": 1,
@@ -181,18 +174,15 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
         },
     ]
 
-    # Mock the function to return the updated mock_bookings
     mock_get_bookings.return_value = mock_bookings
 
-    # Make the GET request
     response = client.get(
         "/bookings", headers={"Authorization": f"Bearer {admin_token}"}
     )
 
-    # Assertions
     assert response.status_code == 200
-    assert response.get_json() == mock_bookings  # Ensure the response matches the mock
-    mock_get_bookings.assert_called_once()  # Verify the mock was called
+    assert response.get_json() == mock_bookings
+    mock_get_bookings.assert_called_once()
 
 
 def test_view_all_bookings_unauthorized(client, user_token):

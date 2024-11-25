@@ -1,4 +1,4 @@
-import pytest  # type: ignore
+import pytest
 from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token
 from views.auth import auth_blueprint
@@ -15,7 +15,6 @@ def app():
     JWTManager(app)
     app.register_blueprint(auth_blueprint)
 
-    # Initialize Swagger for testing
     Swagger(
         app,
         template={
@@ -57,8 +56,8 @@ def admin_token(app):
     """
     with app.test_request_context():
         token = create_access_token(
-            identity="admin@example.com",  # Set identity to a string
-            additional_claims={"role": "Admin"},  # Add role as a custom claim
+            identity="admin@example.com",
+            additional_claims={"role": "Admin"},
         )
         print("Generated Admin Token:", token)
     return token
@@ -71,8 +70,8 @@ def user_token(app):
     """
     with app.test_request_context():
         token = create_access_token(
-            identity="user@example.com",  # Set identity to a string
-            additional_claims={"role": "User"},  # Add role as a custom claim
+            identity="user@example.com",
+            additional_claims={"role": "User"},
         )
         print("Generated User Token:", token)
     return token
@@ -84,7 +83,7 @@ def test_swagger_ui_access(client):
     """
     response = client.get("/apidocs/")
     assert response.status_code == 200
-    assert b"swagger-ui" in response.data  # Class name used in the Swagger UI
+    assert b"swagger-ui" in response.data
 
 
 def test_auth_endpoint_admin_access(client, admin_token):

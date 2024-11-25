@@ -62,7 +62,7 @@ def test_delete_destination_by_id(mock_save, mock_load, mock_destinations):
     """
     mock_load.return_value = mock_destinations
 
-    result = delete_destination_by_id("1234")  # ID to delete
+    result = delete_destination_by_id("1234")
     assert result is True
 
     updated_destinations = [{"id": "5678", "name": "New York", "country": "USA"}]
@@ -72,46 +72,42 @@ def test_delete_destination_by_id(mock_save, mock_load, mock_destinations):
     assert result is False
 
 
-@patch("models.destination.load_bookings")  # Correct path for patching
+@patch("test_destination_models.load_bookings")
 def test_load_bookings(mock_load):
     """
     Test loading bookings.
     """
-    # Mock data for bookings
+
     mock_bookings = [
         {"id": "abcd", "destination_id": "1234", "user_id": "user1"},
         {"id": "efgh", "destination_id": "5678", "user_id": "user2"},
     ]
 
-    # Set the mock's return value
     mock_load.return_value = mock_bookings
 
-    # Call the function under test
     bookings = load_bookings()
 
-    # Assertions
-    assert len(bookings) == 2  # Verify the length of mocked data
-    assert bookings == mock_bookings  # Verify the returned data matches the mock
-    mock_load.assert_called_once()  # Ensure the mocked function was called once
+    print("Mock called:", mock_load.called)
+    print("Mock call count:", mock_load.call_count)
+    print("Bookings returned:", bookings)
+
+    assert len(bookings) == 2
+    assert bookings == mock_bookings
+    mock_load.assert_called_once()
 
 
-@patch("controllers.destination.generate_unique_id")  # Correct path for patching
+@patch("controllers.destination.generate_unique_id")
 def test_generate_unique_id(mock_generate):
     """
     Test unique ID generation.
     """
-    # Configure the mock to return a specific value
     mock_generate.return_value = "mocked-uuid"
 
-    # Debugging: Verify if the mock is being applied
     print("Mock setup complete")
 
-    # Call the function under test
     unique_id = generate_unique_id()
 
-    # Debugging: Check if the mock was called
     print("Mock called:", mock_generate.call_count)
 
-    # Assertions
-    assert unique_id == "mocked-uuid"  # Verify the mock value is returned
-    mock_generate.assert_called_once()  # Confirm the mock was called once
+    assert unique_id == "mocked-uuid"
+    mock_generate.assert_called_once()

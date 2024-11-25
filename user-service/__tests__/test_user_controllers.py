@@ -1,6 +1,6 @@
 import pytest
 from controllers.user import register_user, authenticate_user, fetch_profile
-from models.user import load_users, save_users, find_user_by_email, add_user
+from models.user import load_users, save_users
 from werkzeug.security import generate_password_hash
 
 
@@ -9,7 +9,6 @@ def setup_user_data():
     """
     Fixture to set up a clean test environment with mock user data.
     """
-    # Backup and reset user data
     original_users = load_users()
     test_users = [
         {
@@ -27,9 +26,8 @@ def setup_user_data():
     ]
     save_users(test_users)
 
-    yield test_users  # Provide test users to tests
+    yield test_users
 
-    # Restore original user data
     save_users(original_users)
 
 
@@ -47,7 +45,7 @@ def test_register_user_success(setup_user_data):
 
     assert registered_user["email"] == "newuser@example.com"
     assert registered_user["role"] == "User"
-    assert len(load_users()) == 3  # Ensure new user is added
+    assert len(load_users()) == 3
 
 
 def test_register_user_missing_fields(setup_user_data):

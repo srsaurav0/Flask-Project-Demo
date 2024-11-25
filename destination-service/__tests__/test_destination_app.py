@@ -12,7 +12,7 @@ def app():
     """
     app = Flask(__name__)
     app.config["JWT_SECRET_KEY"] = "shared-secret-key"
-    JWTManager(app)  # Initialize JWTManager
+    JWTManager(app)
     app.register_blueprint(destination_blueprint)
     return app
 
@@ -52,7 +52,6 @@ def test_get_destinations(mock_fetch, client):
     """
     Test retrieving all destinations.
     """
-    # Define mock destinations to return
     mock_destinations = [
         {
             "id": "1",
@@ -62,16 +61,13 @@ def test_get_destinations(mock_fetch, client):
         },
         {"id": "2", "name": "New York", "description": "Big Apple", "location": "USA"},
     ]
-    # Mock the controller function
     mock_fetch.return_value = mock_destinations
 
-    # Make a GET request to the /destinations endpoint
     response = client.get("/destinations")
 
-    # Assert the response
     assert response.status_code == 200
     assert response.get_json() == mock_destinations
-    mock_fetch.assert_called_once()  # Ensure the mock was called
+    mock_fetch.assert_called_once()
 
 
 @patch("views.destination.create_destination")
@@ -79,7 +75,6 @@ def test_add_destination_success(mock_create, client, admin_token):
     """
     Test adding a destination as admin.
     """
-    # Mock the return value of create_destination
     mock_create.return_value = {
         "id": "3",
         "name": "Tokyo",
@@ -87,26 +82,22 @@ def test_add_destination_success(mock_create, client, admin_token):
         "location": "Japan",
     }
 
-    # Data to be sent in the POST request
     data = {
         "name": "Tokyo",
         "description": "Land of the Rising Sun",
         "location": "Japan",
     }
 
-    # Make a POST request to add a destination
     response = client.post(
         "/destinations",
         json=data,
         headers={"Authorization": f"Bearer {admin_token}"},
     )
 
-    # Assert the response
     assert response.status_code == 201
     assert response.get_json()["message"] == "Destination added successfully"
     assert response.get_json()["destination"]["name"] == "Tokyo"
 
-    # Ensure the mock was called with the correct arguments
     mock_create.assert_called_once_with(data)
 
 
@@ -133,19 +124,15 @@ def test_delete_destination_success(mock_remove, client, admin_token):
     """
     Test deleting a destination as admin.
     """
-    # Mock the return value to indicate successful deletion
     mock_remove.return_value = None
 
-    # Make a DELETE request to delete the destination
     response = client.delete(
         "/destinations/1", headers={"Authorization": f"Bearer {admin_token}"}
     )
 
-    # Assert the response
     assert response.status_code == 200
     assert response.get_json()["message"] == "Destination deleted successfully"
 
-    # Ensure the mock was called with the correct ID
     mock_remove.assert_called_once_with("1")
 
 
@@ -165,7 +152,6 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
     """
     Test viewing all bookings as admin.
     """
-    # Updated mock data to match the actual structure
     mock_bookings = [
         {
             "id": 1,
@@ -187,22 +173,17 @@ def test_view_all_bookings_success(mock_get_bookings, client, admin_token):
         },
     ]
 
-    # Mock `get_all_bookings` to return mock_bookings
     mock_get_bookings.return_value = mock_bookings
 
-    # Make the GET request to the `/bookings` endpoint
     response = client.get(
         "/bookings", headers={"Authorization": f"Bearer {admin_token}"}
     )
 
-    # Debug: Ensure the mock is called
     print("Mock called:", mock_get_bookings.call_count)
     mock_get_bookings.assert_called_once()
 
-    # Assert the response status code
     assert response.status_code == 200
 
-    # Assert the response matches the mock data
     response_data = response.get_json()
     assert response_data == mock_bookings
 

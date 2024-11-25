@@ -20,10 +20,8 @@ def test_validate_auth_admin(mocker, app):
     Test that validate_auth allows admin users.
     """
     with app.test_request_context():
-        # Mock get_jwt to return admin claims
         mocker.patch("controllers.auth.get_jwt", return_value={"role": "Admin"})
 
-        # Call the function and ensure it returns a success response
         response = validate_auth(identity="test@example.com")
         assert response.status_code == 200
         assert response.get_json() == {"message": "Admin access granted"}
@@ -34,10 +32,8 @@ def test_validate_auth_non_admin(mocker, app):
     Test that validate_auth denies non-admin users.
     """
     with app.test_request_context():
-        # Mock get_jwt to return non-admin claims
         mocker.patch("controllers.auth.get_jwt", return_value={"role": "User"})
 
-        # Call the function and capture the response
         response = validate_auth(identity="test@example.com")
         assert response.status_code == 403
         assert response.get_json() == {"error": "Admin access required"}

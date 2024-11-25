@@ -9,10 +9,8 @@ from models.user import (
     validate_password,
 )
 
-# Path to a temporary user_data.py for testing
 TEST_USER_DATA_FILE = os.path.join(os.path.dirname(__file__), "test_user_data.py")
 
-# Path to the actual user_data.py
 USER_DATA_FILE = os.path.join(os.path.dirname(__file__), "../user_data.py")
 
 
@@ -24,22 +22,19 @@ def setup_and_teardown():
     """
     backup_file = f"{USER_DATA_FILE}.bak"
 
-    # Backup the original user_data.py file
     if os.path.exists(USER_DATA_FILE):
         if os.path.exists(backup_file):
-            os.remove(backup_file)  # Remove existing backup
+            os.remove(backup_file)
         os.rename(USER_DATA_FILE, backup_file)
 
-    # Create a clean user_data.py for testing
     with open(USER_DATA_FILE, "w") as file:
-        file.write("users = []")  # Start with an empty list
+        file.write("users = []")
 
-    yield  # This is where the tests will run
+    yield
 
-    # Restore the original user_data.py file
     if os.path.exists(backup_file):
         if os.path.exists(USER_DATA_FILE):
-            os.remove(USER_DATA_FILE)  # Remove test file
+            os.remove(USER_DATA_FILE)
         os.rename(backup_file, USER_DATA_FILE)
 
 
