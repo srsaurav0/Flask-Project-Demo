@@ -1,4 +1,4 @@
-# Travel API Implementation using Python and Flask
+# Travel API Microservices Design using Python and Flask
 
 This project is a modular **Travel API** built using Flask, following the **Model-View-Controller (MVC)** architecture. It includes authentication, user management, and destination services.
 
