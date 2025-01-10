@@ -47,10 +47,10 @@ FLASK-PYTHON-ASSIGNMENT/
 │ ├── views/ 
 │ └── tests/ # Unit tests for User Service 
 ├── destination-service/ 
-│ ├── app.py # Main application entry point for Destination Service 
+│ ├── app.py # Main application entry point for Destination Services
 │ ├── controllers/ 
 │ ├── views/ 
-│ └── tests/ # Unit tests for Destination Service 
+│ └── tests/ # Unit tests for Destination Services
 ├── .gitignore 
 ├── README.md 
 └── requirements.txt
